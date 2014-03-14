@@ -5,9 +5,14 @@ import shutil
 fileLoc = ''#set to dir path of files to be renamed
 newPrefix = 'some_pic'#set this to new name prefix of files
 filesList = os.listdir(path=fileLoc)
-print(filesList)
+manifest = ''
 
 for file in filesList:
     fileName = fileLoc + '/' + file
+    manifest += file + ':: description: ... \r\n'
     shutil.copyfile(fileName, fileLoc + '/' + newPrefix + file)
     os.remove(fileName)
+
+manifestFile = open(fileLoc + '/' + 'descriptions.txt' ,'w')
+manifestFile.write(manifest)
+manifestFile.close()
